@@ -1,0 +1,293 @@
+/* ---------------------------------------------------- */
+/* 🌑 ESTILO: SANTUÁRIO DAS SOMBRAS (Gótico/Trevoso) 🌑  */
+/* ---------------------------------------------------- */
+
+/* === VARIÁVEIS DE CORES === */
+:root {
+    --color-bg-dark: #0f0a0e; /* Preto muito escuro / Noite */
+    --color-panel-bg: #1c151a; /* Fundo do painel (tom de vinho escuro/roxo) */
+    --color-text-light: #e0d0c5; /* Texto principal (pergaminho claro) */
+    --color-accent-gold: #cfa14a; /* Dourado/Bronze para destaques */
+    --color-shadow: #000000;
+    --color-border-dark: #332b35; /* Borda escura suave */
+    
+    /* Cores das Barras de Status */
+    --hp-full: #6c2e35; /* Vermelho Escuro de Sangue */
+    --hp-mid: #a04020; /* Laranja/Cobre Escuro */
+    --hp-low: #3a1a1a; /* Quase preto/critico */
+    --xp-color: #5d4a70; /* Roxo/Misterioso */
+}
+
+/* === RESET & BASE === */
+* {
+    box-sizing: border-box;
+    user-select: none;
+    font-family: "Cinzel", "Trajan Pro", serif;
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    /* Textura medieval escura como fundo global */
+    background: url("https://tse1.mm.bing.net/th/id/OIP.R90iQlePh0Yexd-c9B5YsgHaE7?rs=1&pid=ImgDetMain&o=7&rm=3") center/cover no-repeat;
+    background-color: var(--color-bg-dark); /* Fundo de segurança */
+    color: var(--color-text-light);
+    overflow-x: hidden; /* Evita barra de rolagem horizontal */
+}
+
+/* === APP WRAPPER === */
+.rpg-app-wrapper {
+    min-height: 100vh; /* Ocupa a altura mínima da tela */
+    padding: 10px; 
+    max-width: 1400px; /* Limita largura em telas grandes */
+    margin: 0 auto; /* Centraliza */
+}
+
+/* === TÍTULO PRINCIPAL (Ajustado para Responsividade) === */
+.main-title {
+    text-align: center;
+    color: var(--color-accent-gold);
+    text-shadow: 1px 1px 5px var(--color-shadow);
+    
+    /* Ajuste para caber em telas menores, mas não ficar gigante */
+    font-size: clamp(1.5em, 5vw, 2.2em); 
+    
+    letter-spacing: 2px;
+    margin: 20px 0 30px 0; /* Margem superior e inferior ajustadas */
+    white-space: normal; 
+    word-break: break-word;
+}
+
+/* === GRADE PRINCIPAL (Painéis do Jogo) === */
+.rpg-grid-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px; 
+    width: 100%;
+}
+
+.rpg-column {
+    display: flex;
+    flex-direction: column;
+    gap: 15px; 
+}
+
+/* === SEÇÕES / PAINÉIS === */
+.rpg-section {
+    background: var(--color-panel-bg);
+    
+    /* Borda gótica/antiga */
+    border: 2px solid var(--color-accent-gold); 
+    border-radius: 4px;
+    padding: 12px;
+    
+    /* Sombra mais trevosa */
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.7); 
+    position: relative;
+    overflow: hidden;
+    flex-grow: 0; 
+}
+
+/* Efeito de pergaminho molhado/sombrio */
+.rpg-section::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(145deg, rgba(255, 255, 255, 0.03), rgba(0, 0, 0, 0.25));
+    pointer-events: none;
+}
+
+.rpg-section h3.section-title {
+    margin: 0 0 10px;
+    font-size: 1.1em;
+    text-transform: uppercase;
+    color: var(--color-accent-gold);
+    border-bottom: 1px solid var(--color-border-dark);
+    padding-bottom: 5px;
+    letter-spacing: 1px;
+}
+
+.mission-section, .ranking-section { flex-grow: 1; } 
+
+/* === ELEMENTOS INTERNOS (Inputs/Botões) === */
+.input-group { display: flex; align-items: center; margin-bottom: 10px; gap: 10px; }
+.party-add { flex-wrap: wrap; }
+.mission-input-group { display: flex; gap: 5px; margin-bottom: 15px; }
+
+input[type="text"], select, textarea {
+    font-family: "Cinzel", serif;
+    font-size: 0.9em;
+    color: var(--color-text-light);
+    background: rgba(0, 0, 0, 0.5); /* Fundo dos inputs mais escuro */
+    border: 1px solid var(--color-border-dark);
+    border-radius: 3px;
+    padding: 6px 10px;
+    outline: none;
+}
+
+input:focus, select:focus, textarea:focus {
+    border-color: var(--color-accent-gold);
+    box-shadow: 0 0 8px rgba(207, 161, 74, 0.5);
+}
+
+/* Botões - Tons de Bronze/Cobre */
+.rpg-button {
+    cursor: pointer;
+    background: linear-gradient(180deg, #b08c4e, #7a5f33);
+    border: 1px solid #cfa14a;
+    color: var(--color-bg-dark); /* Texto escuro no botão claro */
+    font-weight: bold;
+    text-shadow: 0 1px 0 #fff3e0;
+    transition: 0.2s;
+    text-transform: uppercase;
+    padding: 8px 12px;
+    border-radius: 4px;
+}
+
+.rpg-button:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+    background: linear-gradient(180deg, #d2a953, #8f6e37);
+}
+.rpg-button:disabled { 
+    opacity: 0.5; 
+    cursor: not-allowed; 
+    transform: none; 
+    box-shadow: none;
+}
+
+/* Estilos de Botões Específicos */
+.rpg-button.primary { background: linear-gradient(180deg, #5d4a70, #41324f); color: var(--color-text-light); text-shadow: none; border-color: #795799; }
+.rpg-button.danger { background: linear-gradient(180deg, #993a3a, #7a2d2d); border-color: #cc5050; color: var(--color-text-light); text-shadow: none; }
+.rpg-button.success { background: linear-gradient(180deg, #4b7d33, #335922); border-color: #64a646; color: var(--color-text-light); text-shadow: none; }
+.rpg-button.secondary { background: #333; border-color: #555; color: var(--color-text-light); text-shadow: none; }
+.rpg-button.tertiary { padding: 4px 8px; font-size: 0.8em; }
+
+/* === LISTAS DE ITENS, MISSÕES, ETC. === */
+.inventory-list, .mission-list, .party-list {
+    list-style: none;
+    margin: 8px 0;
+    padding: 0;
+}
+
+.inventory-list li, .mission-item, .party-list li {
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid var(--color-border-dark);
+    margin: 5px 0;
+    padding: 6px 10px;
+    border-radius: 3px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: background 0.1s;
+}
+
+.inventory-list li:hover, .party-list li:hover {
+    background: rgba(0, 0, 0, 0.5);
+}
+
+/* Estilos de Missão */
+.mission-item.principal { font-weight: bold; color: var(--color-accent-gold); border-left: 3px solid var(--color-accent-gold); }
+.mission-item.urgente { background: rgba(150, 50, 50, 0.2); border-left: 3px solid #cc5050; }
+.mission-item.completed { opacity: 0.7; text-decoration: line-through; color: #888; background: #252028; }
+.rpg-button.complete-mission-btn { padding: 4px 8px; font-size: 0.8em; margin-left: 10px; }
+
+/* === BARRAS HP/XP === */
+.status-line { display: flex; align-items: center; margin-bottom: 10px; gap: 10px; }
+.status-label { font-size: 0.9em; min-width: 60px; }
+
+.health-bar-container, .xp-bar-container {
+    height: 18px;
+    flex-grow: 1;
+    border: 1px solid var(--color-border-dark);
+    border-radius: 9px;
+    position: relative;
+    overflow: hidden;
+    background-color: #0d0a0e;
+    box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.8);
+}
+
+.health-bar-fill, .xp-bar-fill {
+    height: 100%;
+    transition: width .3s;
+}
+
+/* Estilos de Vida */
+.health-bar-container .health-text {
+    position: absolute;
+    width: 100%;
+    text-align: center;
+    line-height: 18px;
+    font-size: 11px;
+    color: #fff;
+    text-shadow: 0 0 3px #000;
+    z-index: 2; /* Fica acima da barra de preenchimento */
+}
+
+.health-bar-container.vida-normal .health-bar-fill { background: linear-gradient(90deg, #4b7d33, #64a646); }
+.health-bar-container.vida-alerta .health-bar-fill { background: linear-gradient(90deg, #a04020, #d1703e); }
+.health-bar-container.vida-critica .health-bar-fill { background: linear-gradient(90deg, #993a3a, #cc5050); }
+.warning { color: #cc5050; font-weight: bold; font-size: 0.9em; }
+
+/* Estilos de XP */
+.xp-bar-container .xp-bar-fill { background: linear-gradient(90deg, #41324f, #795799); }
+.xp-bar-container .xp-text {
+    position: absolute;
+    width: 100%;
+    text-align: right;
+    padding-right: 5px;
+    line-height: 18px;
+    font-size: 10px;
+    color: #fff;
+    text-shadow: 0 0 3px #000;
+}
+
+.gold-counter { 
+    margin: 10px 0; 
+    color: var(--color-accent-gold); 
+    font-weight: bold; 
+    font-size: 1.1em;
+}
+
+/* === ATRIBUTOS === */
+.attribute-line {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 4px 6px;
+    margin-bottom: 5px;
+    border-bottom: 1px dashed var(--color-border-dark);
+}
+.attribute-line:last-child { border-bottom: none; }
+.attribute-label { font-weight: bold; }
+.attr-btn { padding: 2px 6px; font-size: 0.8em; margin-left: 5px; }
+
+/* === RANKING / PARTY === */
+.rpg-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+    font-size: 0.9em;
+}
+.rpg-table th {
+    background-color: var(--color-accent-gold);
+    color: var(--color-bg-dark);
+    padding: 6px;
+}
+.rpg-table td {
+    border: 1px solid var(--color-border-dark);
+    padding: 8px;
+}
+.rpg-table tr.current-hero {
+    background-color: rgba(70, 40, 70, 0.5); /* Destaque sutil no Herói */
+    font-weight: bold;
+    color: #ffdd9c;
+}
+
+/* === MEDIA QUERIES (Responsividade) === */
+@media (max-width: 992px) {
+    .rpg-grid-container {
+        grid-template-columns: 1fr; /* Coluna única em telas menores */
+    }
+}
