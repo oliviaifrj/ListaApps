@@ -73,6 +73,7 @@ function App() {
 
   return (
     <div
+      className="App"
       style={{
         background: "#0d0d0d",
         color: "#00ffcc",
